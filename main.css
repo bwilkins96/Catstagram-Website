@@ -1,0 +1,135 @@
+body {
+    background-color: aquamarine;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h1 {
+    width: fit-content;
+    margin: auto;
+    padding-top: 0.5vh;
+    padding-bottom: 3vh;
+}
+
+#catsFeed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cat {
+    width: 50vw;
+    padding-bottom: 0;
+}
+
+.catDiv {
+    width: fit-content;
+}
+
+.voteContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.voteCount {
+    margin: 0 0 1vh 0;
+}
+
+.buttons {
+    padding-top: 0;
+    margin: 0 0 2vh 0;
+}
+
+.upvote {
+    margin-right: 5px;
+}
+
+.downvote {
+    margin-left: 5px;
+}
+
+.commentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.posted {
+    overflow-y: scroll;
+    max-height: 20vh;
+    width: 40vw;
+    background-color: coral;
+    list-style: none;
+    padding-left: 5px;
+}
+
+.comment {
+    padding-bottom: 10px;
+    padding-left: 0;
+}
+
+.comment .inner {
+    font-size: 12px;
+}
+
+.commentForm {
+    display: flex;
+    align-items: center;
+}
+
+.commentField {
+    margin: 0 10px;
+    min-width: 25vw;
+    min-height: 3vh;
+    max-width: 40vw;
+    max-height: 50vh;
+    background-color: whitesmoke;
+}
+
+#load {
+    display: block;
+    width: fit-content;
+    margin: auto;
+    font-size: 25px;
+}
+
+#toggle {
+    position: absolute;
+    right: 5vw;
+    top: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.expand {
+    margin-bottom: 2vh;
+}
+
+
+@media screen and (max-width: 700px) {
+    .cat {
+        width: 85vw;
+    }
+
+    .posted {
+        width: 85vw;
+    }
+
+    .commentForm {
+        flex-direction: column;
+    }
+
+    .commentField {
+        min-width: 60vw;
+        max-width: 75vw;
+        max-height: 30vh;
+        margin: 10px 0;
+    }
+
+    #toggle {
+        right: 0;
+        top: 0;
+    }
+}
