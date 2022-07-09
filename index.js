@@ -16,8 +16,6 @@ async function getCat() {
     return catImg;
 }
 
-//let visited = new Set();
-//let catData = {};
 let currentPageData;
 
 window.onload = event => {
@@ -28,9 +26,6 @@ window.onload = event => {
     let saved = localStorage.getItem("currentCats");
     if (saved) { currentPageData = JSON.parse(saved); restorePage()}
     else {initializePage()}
-
-    //try { getData() }
-    //catch {console.log("no data to load!")}
 
     async function makeCatImg(catURL) {
         let catImg = catURL || await getCat();
@@ -48,13 +43,8 @@ window.onload = event => {
         newCat.appendChild(catImg);
 
         let catSrc = getURL(newCat);
-        //if (visited.has(catSrc)) {
-        //    console.log("repeat cat check!");
-        //    upvotes = catData[catSrc].upvotes;
-        //    commentHTML = catData[catSrc].comments;
-        //}
 
-        let votes = getVoteContainer(upvotes || 0);
+        let votes = getVoteContainer(upvotes || getRandomNum());
         newCat.appendChild(votes);
 
         let comments = getCommentsContainer(commentHTML || " ");
@@ -67,7 +57,6 @@ window.onload = event => {
         }
 
         catsFeed.appendChild(newCat);
-        //saveData(catSrc, newCat);
         catNumber++;
 
         saveCurrentPage();
@@ -155,9 +144,16 @@ window.onload = event => {
 
         let posted = document.createElement("ul");
         posted.setAttribute("class", "posted");
-        if (commentHTML.length > 0) {
+        if (commentHTML.length > 1) {
             posted.innerHTML = commentHTML;
-        }
+        } else {
+            let randomNum = Math.floor(Math.random() * 4);
+            for (let i = 0; i < randomNum; i++) {
+                let comment = getRandomComment();
+                posted.insertAdjacentHTML("afterbegin", `<li class="comment">${comment} - <span class="inner">at ${new Date()}</span></li>`);
+                }
+            }
+
         container.appendChild(posted);
 
         submit.addEventListener("click", event => {
@@ -197,20 +193,7 @@ window.onload = event => {
         } catch {console.log(`unload stopped!`)}
 
         saveCurrentPage();
-        //sendData();
-        //getData();
     }
-
-    //function saveData(catURL, cat) {
-    //    let currentCat = cat || findCat(catURL);
-
-    //    catData[catURL] = {
-    //        comments: getComments(currentCat),
-    //        upvotes: getUpvotes(currentCat)
-    //    };
-
-        //localStorage.setItem("catData", JSON.stringify(catData));
-    //}
 
     function saveCurrentPage() {
         currentPageData = {};
@@ -223,8 +206,6 @@ window.onload = event => {
                 upvotes: getUpvotes(cat),
                 comments: getComments(cat)
             }
-
-            //saveData(getURL(cat), cat);
         }
 
         localStorage.setItem("currentCats", JSON.stringify(currentPageData));
@@ -261,23 +242,6 @@ window.onload = event => {
         return cat.children[2].children[1].innerHTML;
     }
 
-    /*async function sendData() {
-        let send = await fetch("/catData", {
-            method: "POST",
-            body: JSON.stringify(catData)
-        });
-    }
-
-    async function getData() {
-        let data = await (await fetch("/catData")).json();
-        if (data) {
-            catData = data;
-            for (let keys in catData) {
-                visited.add(keys);
-            }
-        }
-    } */
-
     let extraCount = 0;
     const extrasButton = document.getElementById("toggle");
     extrasButton.addEventListener("click", event => {
@@ -301,5 +265,20 @@ window.onload = event => {
         if (extraCount % 2 === 0) { extrasButton.innerText = "Hide Extras" }
         else { extrasButton.innerText = "Show Extras" }
     });
+
+    function getRandomNum() {
+        return Math.floor(Math.random() * 500000);
+    }
+
+    function getRandomComment() {
+        let possibleComments = ["wow! XD", "thats meowriffic", "MEOW", "You're the cat's meow!", "nice",
+                        "cool!!!!!", "such floof", "Do u wanna be friends?", "You look great today!",
+                        "I hope the humans don't see this!", "JavaScript is a cool programming language",
+                        "ruff! I mean, how do you do fellow cats?", "100", "I'm hungry", "I want to RUN AROUND!",
+                        "Nice coat, what grooming techniques do you use? I like to lick mine", "That's so funny I almost lost one of my nine lives lol"];
+
+        let randomIdx = Math.floor(Math.random() * possibleComments.length);
+        return possibleComments[randomIdx];
+    }
 
 }
