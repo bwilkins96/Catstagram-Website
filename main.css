@@ -40,12 +40,41 @@ h1 {
     margin: 0 0 2vh 0;
 }
 
+.upvote, .downvote, .submit {
+    border-radius: 25px;
+    border: 2px solid;
+}
+
 .upvote {
     margin-right: 5px;
+    background-color: rgb(127, 240, 127);
+    transition: 0.1s;
+    border-color: rgb(48, 255, 48);
+}
+
+.upvote:hover {
+    background-color: rgb(48, 255, 48);
 }
 
 .downvote {
     margin-left: 5px;
+    background-color: rgb(255, 108, 108);
+    transition: 0.1s;
+    border-color: rgb(255, 81, 81);
+}
+
+.downvote:hover {
+    background-color: rgb(251, 81, 81);
+}
+
+.submit {
+    background-color: rgb(88, 228, 253);
+    transition: 0.1s;
+    border-color: rgb(52, 225, 255);
+}
+
+.submit:hover {
+    background-color: rgb(38, 222, 255);
 }
 
 .commentContainer {
@@ -91,12 +120,29 @@ h1 {
     width: fit-content;
     margin: auto;
     font-size: 25px;
+
+    background-color: rgb(101, 163, 255);
+    border: 1px solid rgb(56, 136, 255);
+    border-radius: 25px;
+    transition: 0.1s;
+}
+
+#load:hover {
+    background-color: rgb(56, 136, 255);
 }
 
 #toggle {
     position: absolute;
     right: 5vw;
     top: 10px;
+
+    border-radius: 0;
+    border: 1px solid grey;
+    transition: 0.1s;
+}
+
+#toggle:hover {
+    background-color: rgb(215, 215, 215);
 }
 
 .hide {
